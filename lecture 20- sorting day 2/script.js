@@ -1,86 +1,73 @@
-//Merge two arrays
-//using merge sort
-//TC----->O(n+m)
-let arr1=[1,3,4,7,10];
-let arr2=[2,9,12]
-function MergeSortedArray(arr1,arr2){
-    let i=0;j=0;
-    let merged=[];
+/* Merge two sorted arrays */
+function mergeSortedArrays(arr1, arr2) {
+  let n = arr1.length;
+  let m = arr2.length;
+  let i = 0; //pointer of current element from arr1
+  let j = 0; //pointer of current element from arr2
+  let k = 0; //pointer that tells where to insert an element in `ans` array
 
-    while(i<arr1.length && j<arr2.length){
-        if(arr1[i]<arr2[j]){
-            merged.push(arr1[i])
-            i++
-        }else{
-            merged.push(arr2[j])
-            j++
-        }
+  let ans = new Array(n + m);
+
+  while (i < n && j < m) {
+    if (arr1[i] < arr2[j]) {
+      ans[k] = arr1[i];
+      i++;
+    } else {
+      ans[k] = arr2[j];
+      j++;
     }
-    while(i<arr1.length){
-        merged.push(arr1[i]);
-        i++
-    };
-    while(j<arr2.length){
-        merged.push(arr2[j])
-        j++
-    }
-    return merged
+    k++;
+  }
+
+  while (i < n) {
+    ans[k] = arr1[i];
+    i++;
+    k++;
+  }
+
+  while (j < m) {
+    ans[k] = arr2[j];
+    j++;
+    k++;
+  }
+  return ans;
 }
-console.log(MergeSortedArray(arr1,arr2))
 
+let arr1 = [1, 3, 4, 7, 10];
+let arr2 = [2, 9, 12, 14, 20];
+console.log(
+  "Merging two arrays: " + arr1.join(", ") + " AND " + arr2.join(", ")
+);
+console.log(mergeSortedArrays(arr1, arr2).join(" "));
 
-//using spread operator
-function merge(arr1,arr2){
-   let merged = [...arr1,...arr2];
-console.log(merged.sort((a,b)=>a-b));
+/* MERGE Sort */
+
+function mergeSort(arr, low, high) {
+  //base case
+  if (low == high) {
+    return [arr[low]];
+  }
+
+  //recursive calls
+  let mid = Math.floor((low + high) / 2);
+  let leftSortedArr = mergeSort(arr, low, mid);
+  let rightSortedArr = mergeSort(arr, mid + 1, high);
+
+  //merging of returned arrays
+  let mergedArr = mergeSortedArrays(leftSortedArr, rightSortedArr);
+  return mergedArr;
 }
-merge(arr1,arr2)
 
-//Q: divide the arrays in two halfs recursively and sort them using merge sort
-let arr=[3,7,1,5,8,2,4];
-function mergeDivide(arr,low,high){
-    // console.log(mid)
-    if(low==high){
-        return [arr[low]]
-    }
-    
-   let mid=Math.floor((low+high)/2)
-    let leftSort=mergeDivide(arr,low,mid);
-    let rightSort=mergeDivide(arr,mid+1,high);
+let arr = [3, 9, 5, 2, 19, 4, 7];
+console.log(mergeSort(arr, 0, arr.length - 1));
 
-    let finalSort=MergeSortedArray(leftSort,rightSort)
 
-return finalSort
-    
+/* Given a sorted array, whole array is sorted, except the last element, 
+place the last element at its correct position such that whole arr is sorted
 
-}
-console.log(mergeDivide(arr,0,arr.length-1))
-// Initial call: mergeDivide(arr, 0, 6)
+Example: 
 
-// low=0, high=6 → mid = 3
-//will take array 0-3 then 4 -6
-// Split array into [3,7,1,5] and [8,2,4]
+I/p = [1,2,7,9,6]
+O/p = [1,2,6,7,9]
 
-// Recursively sort left half [3,7,1,5]:
-
-// mid = 1 → split into [3,7] and [1,5]
-
-// [3,7] → split into [3] and [7] → base case, then merge → [3,7]
-
-// [1,5] → split into [1] and [5] → merge → [1,5]
-
-// Merge [3,7] and [1,5] → [1,3,5,7]
-
-// Recursively sort right half [8,2,4]:
-
-// mid = 5 → split into [8,2] and [4]
-
-// [8,2] → split into [8] and [2] → merge → [2,8]
-
-// [4] → base case
-
-// Merge [2,8] and [4] → [2,4,8]
-
-// Merge left [1,3,5,7] and right [2,4,8] → [1,2,3,4,5,7,8]
-
-//TC----------> O(nlogn)
+*/
