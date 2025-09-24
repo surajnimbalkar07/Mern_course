@@ -44,6 +44,10 @@ merge(arr1,arr2)
 //Q: divide the arrays in two halfs recursively and sort them using merge sort
 
 //Merge Sort recursively breaks the array into smaller parts and then combines them in sorted order, giving a consistent O(n log n) performance.
+//Merge sort needs extra arrays to hold the merged halves during the combine step, and that’s why its space complexity is O(N).
+//TC------->O(n log n)
+//Space---->O(n)
+
 let arr=[3,7,1,5,8,2,4];
 function mergeDivide(arr,low,high){
     // console.log(mid)
@@ -119,9 +123,30 @@ function insertionSort(array){
             
            
         }
-         // Place key after all greater elements are shifted
-         
+       
+        array[j+1]=key // it is used to place key on its correct position
     }
     return array
 }
 console.log(insertionSort(array))
+
+
+
+//ip=[1,2,7,9,6]
+
+function insertionSortArray(arr3){
+    let n=arr3.length
+    let key=arr3[n-1];
+    let j=n-2;
+
+    while(j>=0 && arr3[j]>key){
+        arr3[j+1]=arr3[j];
+        j--
+    }
+    arr3[j+1]=key;
+    return arr3
+}
+
+let arr3=[1,2,7,9,6]
+console.log(insertionSortArray(arr3))
+
