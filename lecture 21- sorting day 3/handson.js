@@ -141,3 +141,59 @@ nestedArr.sort((a, b) => {
 });
 
 console.log(nestedArr);
+
+
+//localecompare in js
+
+const fruits = ["banana", "Apple", "cherry"];
+fruits.sort((a, b) => a.localeCompare(b));
+console.log(fruits); 
+
+//----------------------------------------------------------------------------
+const employees = [
+  { department: "HR", name: "Anjali", age: 32 },
+  { department: "Tech", name: "Aman", age: 28 },
+  { department: "HR", name: "Rahul", age: 25 },
+  { department: "Tech", name: "Sneha", age: 24 },
+  { department: "Finance", name: "Kunal", age: 30 },
+  { department: "Tech", name: "Divya", age: 28 },
+];
+
+employees.sort((a,b)=>{
+    if(a.department===b.department){
+        return a.age-b.age //number  sorting
+    }
+    return a.department.localeCompare(b.department) //string sorting
+})
+console.log(employees);
+//------------------------------------------------------------------------------
+
+const posts = [
+    { postId: 1, likes: 50, comments: 10 },
+    { postId: 2, likes: 20, comments: 5 },
+    { postId: 3, likes: 80, comments: 15 }
+];
+
+
+// Expected output:
+// [
+//     { postId: 3, likes: 80, comments: 15 },
+//     { postId: 1, likes: 50, comments: 10 },    
+//     { postId: 2, likes: 20, comments: 5 }
+// ]
+
+//Answer=====>
+
+function sortPosts(posts){
+    posts.sort((a,b)=>{
+       
+            return (b.likes+b.comments)-(a.likes+a.comments)
+     
+        
+    })
+    return posts
+}
+const sortedPosts = sortPosts(posts);
+console.log(sortedPosts);
+
+//
