@@ -83,3 +83,41 @@ function maxSumArrayOptimized1(arr) {
     console.log(maxSum)
 }
 maxSumArrayOptimized1(arr)
+
+//---------------------QUESTION------------------------------------------
+/*
+Given a set of N distinct points lying on the X-axis and an integer L,
+the task is to find the number of ways of selecting three points such that
+the distance between the most distant points is less than or equal to L
+
+like:
+let arr1=[1,3,4,2];
+
+{1, 2, 3} Here distance between farthest points = 3 – 1 = 2 <= L
+
+{1, 2, 4} Here distance between farthest points = 4 – 1 = 3 <= L
+
+{1, 3, 4} Here distance between farthest points = 4 – 1 = 3 <= L
+
+{2, 3, 4} Here distance between farthest points = 4 – 2 = 2 <= L
+*/
+
+let n=arr.length
+let arr1=[1,3,4,2];
+let l=3
+function sorting4(n, arr1, l) {
+  // Write your code here
+  let count=0
+  arr.sort((a,b)=>a-b)
+  for(let i=0;i<n;i++){
+     for(let j=i+1;j<n;j++){
+      for(let k=j+1;k<n;k++){
+        if(arr1[k]-arr1[i]<=l){
+          count++
+        }
+      }
+     }
+  }
+  return count
+}
+console.log(sorting4(n,arr1,l))
