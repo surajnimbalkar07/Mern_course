@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" 
+          content="width=device-width, initial-scale=1.0" />
+    <title>Security Guard Vacancy </title>
+  </head>
+  <body>
+    <h1>Security Guard Application Form - Vishal Mega Mart</h1>
+
+    <form>
+
+      <div>
+        <label for="name">Full Name:</label><br />
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          placeholder="Enter your name" 
+          required 
+        />
+      </div>
+
+      <br />
+
+      <div>
+        <label for="email">Email:</label><br />
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder="Enter your email" 
+          required 
+        />
+      </div>
+
+      <br />
+
+      <div>
+        <label for="phone">Phone Number:</label><br />
+        <input 
+          type="tel" 
+          id="phone" 
+          name="phone" 
+          placeholder="Enter phone number" 
+          required 
+        />
+      </div>
+
+      <br />
+
+      <div>
+        <label for="location">Preferred Location:</label><br />
+        <select 
+          id="location" 
+          name="location" 
+          required
+        >
+          <option value="">Select a location</option>
+          <option>Baner</option>
+          <option>Viman Nagar</option>
+          <option>Hadapsar</option>
+          <option>Hinjewadi</option>
+        </select>
+      </div>
+
+      <br />
+
+      <div>
+        <label for="resume">Upload Resume:</label><br />
+        <input 
+          type="file" 
+          id="resume" 
+          name="resume" 
+          required 
+        />
+      </div>
+
+      <br />
+
+      <div>
+        <label for="expected-salary">Expected Salary :</label><br />
+        <input 
+          type="number" 
+          id="expected-salary" 
+          name="expected-salary" 
+          placeholder="Enter expected salary" 
+          required 
+        />
+      </div>
+
+      <br />
+
+      <div>
+        <label for="current-ctc">Current CTC :</label><br />
+        <input 
+          type="number" 
+          id="current-ctc" 
+          name="current-ctc" 
+          placeholder="Enter current CTC" 
+        />
+      </div>
+
+      <br />
+
+      <div>
+        <input 
+          type="checkbox" 
+          id="experience" 
+          name="experience" 
+        />
+        <label for="experience">
+          I have previous security experience
+        </label>
+      </div>
+
+      <br />
+
+      <div>
+        <label>Shift Preference:</label><br />
+
+        <input 
+          type="radio" 
+          id="morning" 
+          name="shift" 
+          value="morning" 
+          required 
+        />
+        <label for="morning">Morning Shift</label><br />
+
+        <input 
+          type="radio" 
+          id="night" 
+          name="shift" 
+          value="night" 
+        />
+        <label for="night">Night Shift</label>
+      </div>
+
+      <br />
+
+      <div>
+        <label for="joining-date">Earliest Joining Date:</label><br />
+        <input 
+          type="date" 
+          id="joining-date" 
+          name="joining-date" 
+          required 
+        />
+      </div>
+
+      <br />
+
+      <button 
+        type="submit"
+      >
+        Submit Application
+      </button>
+
+    </form>
+  </body>
+</html>
