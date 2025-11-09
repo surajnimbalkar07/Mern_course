@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+          font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .newsletter{
+            display: flex;
+            flex-direction: column;
+          
+            align-items: center;
+        }
+        .upperPart{
+            display: flex;
+            flex-direction: column;
+           
+            align-items: center;
+        }
+        .desc{
+            text-align: center;
+            padding: 2rem;
+            width: 40%;
+            color: rgb(110, 105, 105);
+            font-size: 19px;
+            margin-top: -1rem;
+            
+        }
+        h1{
+            color: #333333;
+            margin-bottom: 20px;
+            font-size: 3rem;
+            margin-top: 0rem;
+            
+        }
+        .form{
+          display: flex;
+          flex-direction: column;
+          height: 20rem;
+          
+          align-items: center;
+          justify-content: center;
+        }
+        .subscribe{
+             background-color: white;
+            box-shadow:0px 4px 8px rgba(0,0,0.2,0.2);
+           
+            border-radius: 10px;
+            width: 50%;
+            text-align: center;
+            height: 250px;
+            
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+           
+            gap: 20px;
+            width: 70%;
+
+            
+        }
+        button{
+            border-radius: 5px;
+            padding: 15px;
+            background-color: rgba(48, 75, 250, 0.855);
+            border-style: none;
+            color: white;
+        }
+        input{
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            background-color: rgba(211, 211, 211, 0.442);
+            border-style: none;
+        }
+        .note{
+            color: rgb(110, 105, 105);
+        }
+
+         @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .desc {
+        width: 90%;
+        padding: 1rem;
+        font-size: 16px;
+      }
+
+      .subscribe {
+        width: 70%;
+        height: 250px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      form {
+        width: 90%;
+        gap: 15px;
+      }
+
+      input, button {
+        padding: 12px;
+        font-size: 0.95rem;
+      }
+
+      .note {
+        font-size: 13px;
+      }
+
+      img {
+        width: 120px;
+        height: auto;
+      }
+    }
+
+  
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      .desc {
+        font-size: 15px;
+      }
+
+      button {
+        font-size: 0.9rem;
+      }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="newsletter">
+        <div class="upperPart">
+            <img src="https://tse2.mm.bing.net/th/id/OIP.9pVaLoc9FxwcaYPFwxcJSwHaHa?pid=Api&P=0&h=180" alt="image not found">
+            <h1>Join our newsletter</h1>
+            <p class="desc">Keep up with our latest collections, exclusive deals, and special offers!
+
+We introduce a new collection every week, so stay tuned to snag the hottest items just for you</p>
+        </div>
+        <div class="subscribe">
+            <div class="form">
+                <form >
+                    <input type="text" placeholder="Enter your email">
+                    <button type="submit">Subscribe now</button>
+                </form>
+                <p class="note">Your email is 100% confidential and wont send you any spam</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
