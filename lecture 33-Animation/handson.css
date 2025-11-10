@@ -26,3 +26,5 @@
     body:hover .plane{
       transform: translate(85vw, -85vh) ;
     }
+    /*percentage is used in keyframe*/
+    /*svg-circle,rectangle and lines*
