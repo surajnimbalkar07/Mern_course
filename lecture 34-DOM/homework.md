@@ -35,3 +35,19 @@ className replaces all existing classes when you assign a new one.
 3.
 classList returns a DOMTokenList (like an array).
 className  returns a string.
+
+//SVG:
+
+What is SVG?
+
+SVG stands for Scalable Vector Graphics.
+It’s a way to draw graphics (like shapes, icons, or logos) .
+
+
+Scalable: It never gets blurry, no matter how much you zoom in.
+
+Lightweight: The file size is small since it’s just text code.
+
+Editable: You can style or animate it using CSS or JavaScript.
+
+Web-friendly: Works directly in HTML without needing an image file.
