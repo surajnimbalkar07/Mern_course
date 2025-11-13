@@ -1,0 +1,20 @@
+.outer-div{
+    border: 5px solid black;
+    
+    background-color: antiquewhite;
+    
+}
+.inner-div{
+     border: 5px solid black;
+     margin: 40px;
+    background-color:brown;
+    padding: 10px;
+    
+}
+h1{
+    border: 5px solid black;
+   padding: 5px;
+ display: flex;
+ justify-content: center;
+   background-color: rgb(230, 142, 28);
+}
