@@ -121,7 +121,7 @@ a:hover {
 }
 
 .recipe-info {
-    flex: 1;
+    /* flex: 1; */
     min-width: 0;
     margin-left: 2rem;
 }
