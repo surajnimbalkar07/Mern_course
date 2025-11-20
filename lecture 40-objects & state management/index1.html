@@ -12,34 +12,86 @@
         <p>0</p>
         <button id="increase">Increase</button>
         <button id="decrease">Decrease</button>
+
+        <br><br><br>
+        <span class="level">level: 0</span><br>
+        <span>Select your theme</span>
+        <button id="dark">Dark</button>
+        <button id="light">Light</button>
     </div>
     <script>
+       const state={
+        theme:"dark",
+        level:0
+       }
 
+            //object literal
        const counter = {
             count: 0,
+            level:0,
 
+           
+           //dom reference
             elements: {
                 increase: document.querySelector("#increase"),
                 decrease: document.querySelector("#decrease"),
-                paragraph: document.querySelector("p")
-            },
+                paragraph: document.querySelector("p"),
+                showLevel: document.querySelector(".level"),
 
-            event:()=> {
+                darkThemeBtn:document.querySelector("#dark"),
+                lightThemeBtn:document.querySelector("#light"),
+            },
+            //methods to update level
+         updateLevel() {
+                if (this.count > 10) {
+                    this.level = 3;
+                } else if (this.count > 5) {
+                    this.level = 2;
+                } else {
+                    this.level = 1;
+                }
+
+                this.elements.showLevel.textContent = "level: " + this.level;
+            },
+           //method including all eventlistner
+            event() {
                 this.elements.increase.addEventListener("click", () => {
                     this.count++;
-                    console.log(this.count);
-                    
                     this.elements.paragraph.textContent = this.count;
+                    this.updateLevel();
                 });
 
                 this.elements.decrease.addEventListener("click", () => {
                     this.count--;
                     this.elements.paragraph.textContent = this.count;
+                    this.updateLevel();
+                });
+
+                this.elements.darkThemeBtn.addEventListener("click", () => {
+                    document.body.style.background = "black";
+                    document.body.style.color = "white";
+                });
+
+                this.elements.lightThemeBtn.addEventListener("click", () => {
+                    document.body.style.background = "white";
+                    document.body.style.color = "black";
                 });
             }
         };
 
+
+
         counter.event();  
+
+        // Here we learned how to use encapsulation in JavaScript. 
+        // We grouped related data (like count and level) and functions
+        //  (like updateLevel and event handling) inside a single object. 
+        // This way, everything related to the counter is organized in one place,
+        //  making the code easier to manage and avoiding global variables. 
+        // We also learned how to select DOM elements, handle events, and 
+        // update the UI dynamically using this object.
+      
+        
 
         // let count=0;
         // increase("click", () => {

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Counters</title>
+    <style>
+        .box {
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 10px;
+            display: inline-block;
+            width: 120px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p>0</p>
+        <button class="increase">Increase</button><br><br>
+        <button class="decrease">Decrease</button>
+        <br><br>
+        <span class="level">level: 0</span>
+    </div>
+
+    <div class="box">
+        <p>0</p>
+        <button class="increase">Increase</button><br><br>
+        <button class="decrease">Decrease</button>
+        <br><br>
+        <span class="level">level: 0</span>
+    </div>
+
+     <div class="box">
+        <p>0</p>
+        <button class="increase">Increase</button><br><br>
+        <button class="decrease">Decrease</button>
+        <br><br>
+        <span class="level">level: 0</span>
+    </div>
+    <!-- <div>
+        <span>Select your theme: </span>
+        <button id="dark">Dark</button>
+        <button id="light">Light</button>
+    </div> -->
+
+    <script>
+        // Loop through each box and create separate counter logic
+        const boxes = document.querySelectorAll(".box");
+
+        boxes.forEach(box => {
+            const counter = {
+                count: 0,
+                level: 0,
+                elements: {
+                    increase: box.querySelector(".increase"),
+                    decrease: box.querySelector(".decrease"),
+                    paragraph: box.querySelector("p"),
+                    showLevel: box.querySelector(".level")
+                },
+                updateLevel() {
+                    if (this.count > 10) this.level = 3;
+                    else if (this.count > 5) this.level = 2;
+                    else if (this.count > 0) this.level = 1;
+                    else this.level = 0;
+                    this.elements.showLevel.textContent = "level: " + this.level;
+                },
+               event() {
+                    this.elements.increase.addEventListener("click", () => {
+                        this.count++;
+                        this.elements.paragraph.textContent = this.count;
+                        this.updateLevel();
+                    });
+
+                    this.elements.decrease.addEventListener("click", () => {
+                        this.count--;
+                        this.elements.paragraph.textContent = this.count;
+                        this.updateLevel();
+                    });
+                }
+            };
+            counter.event();
+        });
+
+       
+        // document.getElementById("dark").addEventListener("click", () => {
+        //     document.body.style.background = "black";
+        //     document.body.style.color = "white";
+        // });
+
+        // document.getElementById("light").addEventListener("click", () => {
+        //     document.body.style.background = "white";
+        //     document.body.style.color = "black";
+        // });
+    </script>
+</body>
+
+</html>
