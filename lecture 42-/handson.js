@@ -93,5 +93,5 @@ Test.prototype.value = 100;
 const test = new Test();
 
 console.log(test.value);   // 10  first it will search for value in its own object "test", its found there so we print it
-delete test.value;         //then deleting value property from test object
+delete test.value;         // then deleting value property from test object
 console.log(test.value);   // 100  if test object itself doesnt have value property it will then search for it in prototypr of test , so if its found there we will print it

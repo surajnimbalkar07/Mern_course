@@ -64,7 +64,7 @@ const city = ["Mumbai", "Delhi", "Pune", "Bangalore"];
 const objArray = [];
 
 for (let i = 0; i < names.length; i++) {
-  objArray.push(new User(names[i], age[i], city[i]));
+  objArray.push(new User(names[i], age[i], city[i])); 
 }
 console.log({ objArray });
 
