@@ -73,6 +73,8 @@ A structured collection of lecture notes organized sequentially and grouped by t
 | 39 | DOM Traversal & Navigation | [Lecture 39](lecture%2039-DOM%20traversal%20&%20navigation/) |
 | 40 | Objects & State Management | [Lecture 40](lecture%2040-objects%20&%20state%20management/) |
 | 41 | HOF Functions | [Lecture 41](lecture%2041-Hof%20functions/) |
+| 42 | Constructor & Prototypes | [Lecture 42](lecture%2042-constructor%20and%20prototypes/) |
+| 43 | ES6 Classes Fundamentals | [Lecture 43](lecture%2043-ES6%20Classes%20Fundamentals/) |
 
 ---
 
