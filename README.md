@@ -4,9 +4,6 @@ This repository contains complete notes, code, and practice files from the Accio
 Each lecture folder has been updated with code, assignments, and revision content.
 
 
-# JavaScript Lecture Notes
-
-A structured collection of lecture notes for easy navigation.
 
 ## Lecture Links
 
