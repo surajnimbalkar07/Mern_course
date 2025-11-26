@@ -37,12 +37,15 @@
 
 // Car.prototype.printDetails=function(){
 //     console.log(this.name,this.model,"with speed",this.speed);
-    
 // }
 // Creta.printDetails()
 
 
 // why we use class:
+
+//In modern JavaScript, classes are preferred for object creation and inheritance because the syntax is cleaner. 
+// Constructor functions and prototypes still work and are used in legacy projects, 
+// but new projects usually use classes. Under the hood, class methods are stored on prototypes, so the concept is still relevant.
 // when we create multiple prototypes they are not grouped so we use classes for them in general it groups prototypes and constructor
 // classes cant be hoisted like functions u must declare it before calling
 class Car{
