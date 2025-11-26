@@ -1,4 +1,4 @@
-![AccioJob Logo]([./9fe8e4cf-fd24-43e6-9572-7e8e80af10c7.png](https://course.acciojob.com/acciojob_logo.svg))
+![AccioJob Logo]([[./9fe8e4cf-fd24-43e6-9572-7e8e80af10c7.png](https://course.acciojob.com/acciojob_logo.svg)](https://acciojob.com/src/Navbar/logo.svg))
 
 # AccioJob - MERN FULLSTACK
 
