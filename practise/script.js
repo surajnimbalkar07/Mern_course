@@ -379,3 +379,68 @@ function abcdf(n){
 }
 }
 abcdf(5)
+
+//anagram
+
+
+let str1="listen";
+let str2="silent";
+function isAnagram(str1,str2){
+    if (str1.length!=str2.length)return false;
+    
+    let map=new Map();
+    for(let ch of str1){
+        map.set(ch,(map.get(ch)||0)+1)
+    }
+   
+    for(let ch of str2){
+        if(!map.has(ch) || map.get(ch)==0)return false
+        map.set(ch,(map.get(ch)-1))
+    }
+      return true
+}
+console.log(isAnagram(str1,str2))
+
+//subarray sum k
+let arr=[1,2,3,4,5];
+let k=5;
+let result=[]
+for (let i=0;i<arr.length;i++){
+    let sum=0;
+    for(let j=i;j<arr.length;j++){
+        sum+=arr[j];
+        if(sum==k){
+            result.push(arr.slice(i,j+1))
+        }
+    }
+}
+console.log(result)
+
+
+//max freq char lexiographically
+
+
+const str = "aabbbccc";
+
+// Step 1: Count frequency using a Map
+const freq = new Map();
+for (let ch of str) {
+  freq.set(ch, (freq.get(ch) || 0) + 1);
+}
+
+// Step 2: Find max frequency and lexicographically smallest character
+let maxFreq = 0;
+let maxChar = "";
+
+for (let [ch, count] of freq) {
+  if (count >maxFreq || (count==maxFreq && ch<maxChar) ) {
+    maxFreq = count;
+    maxChar = ch;
+  }
+}
+console.log(maxChar)//“We iterate through the string once to count frequencies →so TC is O(n).
+//op=> b
+
+//“HashMap operations means set,get etc are O(1) because keys are converted to hash codes,
+// which give a direct index in an internal array.
+// So access, insert, and lookup do not require scanning the array.”
