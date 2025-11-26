@@ -1,9 +1,52 @@
-# JavaScript Prototype vs Instance Methods
 
-This README explains the difference between **instance methods** and **prototype methods** in JavaScript using examples from the previous discussion.
+# JavaScript Prototype vs Instance Methods (Lecture 42)
+
+A detailed explanation of **constructor, prototype, instance methods**, and **prototype methods** in JavaScript.
 
 ---
 
+## **Contents**
+
+1. [Constructor Definition](#constructor-definition)
+2. [Prototype Definition](#prototype-definition)
+3. [Instance Method](#1-instance-method)
+4. [Prototype Method](#2-prototype-method)
+5. [Key Points](#key-points)
+6. [Summary](#summary)
+
+---
+
+## **Constructor Definition**
+
+* A **constructor** is a special function used to create objects with the same properties and methods.
+* Called using the `new` keyword.
+* Example:
+
+```js
+function User(name, age, city) {
+  this.name = name;
+  this.age = age;
+  this.city = city;
+}
+```
+
+* Each new object created with `new User(...)` will have its own properties.
+
+---
+
+## **Prototype Definition**
+
+* **Prototype** is an object attached to every function in JavaScript.
+* Properties or methods added to a constructor’s prototype are **shared by all instances** of that constructor.
+* Example:
+
+```js
+User.prototype.printDetails = function() {
+  console.log(`${this.name} is living in ${this.city}`);
+};
+```
+
+---
 ## **1. Instance Method**
 
 ```js
