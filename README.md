@@ -1,11 +1,14 @@
-#AccioJob -MERN FULLSTACK
+![AccioJob Logo](./9fe8e4cf-fd24-43e6-9572-7e8e80af10c7.png)
+
+# AccioJob - MERN FULLSTACK
 
 This repository contains complete notes, code, and practice files from the AccioJob Full Stack course.
 Each lecture folder has been updated with code, assignments, and revision content.
 
-# JavaScript & Web Development Lecture Notes
 
-A structured collection of lecture notes organized sequentially and grouped by topic.
+# Lecture According Sections are shown below
+
+
 
 ---
 
