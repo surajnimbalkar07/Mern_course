@@ -126,7 +126,7 @@ get dob(){
     return this._dob  //it is read only property means if we apply it on any value we cant modify that value later
 }
 set marks(newMarks){
-    set._marks=newMarks  //setters are used to set values and doesnt have return type, it require parameter
+    this._marks=newMarks  //setters are used to set values and doesnt have return type, it require parameter
 }
 }
 //both are used to protect data ,both getter and setter promotes encapsulation
@@ -137,10 +137,10 @@ const mukesh=new Student({
      dob:"24-12-1999",
      grade:10,
 });
-mukesh.dob="21-21-1999"
-console.log(mukesh.dob);
-// mukesh.marks=30;
-// console.log(mukesh.marks);
+// mukesh.dob="21-21-1999"
+// console.log(mukesh.dob);
+mukesh.marks=30;
+console.log(mukesh.marks);
 
 
 //-------------------------------static methods----------------------------------------
