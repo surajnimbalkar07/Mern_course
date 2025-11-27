@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">Click Me</button>
+
+    <script>
+        const button = document.getElementById("btn1");
+
+function showId(prefix){
+    console.log(prefix + this.id);
+}
+
+// Using call
+button.addEventListener("click",()=>{
+    showId.call(button, "Button ID: "); 
+})  // Button ID: btn1
+
+// Using apply
+showId.apply(button, ["ID via apply: "]); // ID via apply: btn1
+
+// Using bind
+const boundShowId = showId.bind(button, "Bound ID: ");
+boundShowId(); // Bound ID: btn1
+
+    </script>
+</body>
+</html>
