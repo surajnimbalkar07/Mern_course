@@ -79,6 +79,7 @@ Each lecture folder has been updated with code, assignments, and revision conten
 | 41 | HOF Functions | [Lecture 41](lecture%2041-Hof%20functions/) |
 | 42 | Constructor & Prototypes | [Lecture 42](lecture%2042-constructor%20and%20prototypes/) |
 | 43 | ES6 Classes Fundamentals | [Lecture 43](lecture%2043-ES6%20Classes%20Fundamentals/) |
+| 44 | Event Delegation & DynamicContent | [Lecture 43](lecture%2043-Event%20Delegation%20&%20Dynamic%20Content/) |
 
 ---
 
