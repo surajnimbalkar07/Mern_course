@@ -16,9 +16,9 @@ function showId(prefix){
 }
 
 // Using call
-button.addEventListener("click",()=>{
-    showId.call(button, "Button ID: "); 
-})  // Button ID: btn1
+
+showId.call(button, "Button ID: "); 
+// Button ID: btn1
 
 // Using apply
 showId.apply(button, ["ID via apply: "]); // ID via apply: btn1

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<header>
+<title></title>
+<style>
+  *{
+	box-sizing:border-box;
+	padding:0;
+	margin:0;
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .container{
+	width:100%;
+  }
+   .navSection{
+    width:100%;
+	background-color:rgb(255, 123, 0);
+	position:fixed
+   }
+   .nav{
+     display:flex;
+	 align-items:center;
+	 justify-content:space-evenly;
+	 height:45px;
+	 
+   }
+   a{
+	text-decoration:none;
+	font-size:1rem;
+   
+	color:white;
+	font-weight:500;
+    
+   }
+   a:hover{
+	color:black
+   }
+   .hero{
+	width:100%;
+    height: 100vh;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	background-color:lightgray;
+	
+   }
+   h1{
+	font-size:3rem;
+	color:black;
+    text-align: center;
+	animation-name:fade;
+	animation-duration:2s;
+	animation-timing-function:ease-in
+   }
+  .context{
+	margin-top:3px;
+	text-wrap:wrap;
+    text-align: center;
+	font-size:1rem;
+	color:black
+  }
+
+
+  @keyframes fade{
+	0%{
+		opacity:0
+	}
+	100%{
+		opacity:1
+	}
+  }
+
+  @media only screen and (max-width:600px){
+    .navSection{
+
+        height: 9rem;
+    }
+      .nav{
+        margin-top: 3rem;
+		/* height:40%; */
+		flex-direction:column;
+		justify-content:center;
+		gap:1rem
+	  }
+	  a{
+		font-size:1rem
+	  }
+	  h1{
+		font-size:2rem;
+		text-wrap:wrap
+	  }
+
+  }
+</style>
+</header>
+<body>
+   <div class="container">
+     <section class="navSection">
+        <div class="nav">
+	       <a href="/home">Home</a>
+	       <a href="/About">About</a>
+	       <a href="/Contact">Contact</a>
+	 
+        </div>
+    </section>
+
+    <section class="hero">
+      <h1>Centralised Store For Your Needs</h1>
+	  <p class="context">Grab anything you want from one place,Even if it's 
+	  about cosmetics,grocerries or clothing
+	  </p>
+    </section>
+   </div>
+   
+</body>
+</html

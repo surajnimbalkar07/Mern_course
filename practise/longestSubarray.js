@@ -9,6 +9,7 @@ for (let i = 0; i < arr.length; i++) {
         sum += arr[j];
         if (sum == k) {
             let length = j - i + 1;
+            map.set(`${i}-${j}`, length); 
 
         }
     }

@@ -16,5 +16,6 @@ greetMe.apply(person,["Hey "])
 
 const greetPerson=greetMe.bind(person,"bye ")
 greetPerson()
-
-//dom element and class use them to apply above concept
+//make copy of function+lock value of this
+//doesnt run immeadiately,just prepare function
+//dom element and class use them to apply above concept  

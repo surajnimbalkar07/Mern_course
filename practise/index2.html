@@ -1,0 +1,90 @@
+<html>
+<header>
+<title>
+  responsive layout using flex and grid
+</title>
+<style>
+*{
+	box-sizing:border-box;
+	padding:0;
+	margin:0
+}
+  .container{
+	display:grid;
+	grid-template-columns:repeat(4,1fr);
+	justify-content:center;
+	gap:5px;
+    max-width: 100%;
+  }
+  .card{
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+ align-items: center;
+	flex-wrap:wrap;
+	height:200px;
+	/* width:200px; */
+    background-color:blue;
+  }
+  .title{
+	font-size:1.3rem
+  }
+ 
+
+
+  @media only screen and (max-width:600px){
+	.container{
+		grid-template-columns:repeat(2,1fr);
+		gap:8px
+	}
+	.card{
+		
+
+	}
+	.title{
+		font-size:1rem
+	}
+  }
+
+</style>
+</header>
+<body>
+<div class="container">
+
+ <div class="card">
+    <div class="img">
+	  
+	</div>
+    <h2 class="title">Card1</h2>
+    <p class="description">this is card1</p>
+  </div>
+
+  <div class="card">
+    <div class="img">
+	  
+	</div>
+    <h2 class="title">Card2</h2>
+    <p class="description">this is card2</p>
+  </div>
+
+  <div class="card">
+    <div class="img">
+	  
+	</div>
+    
+    <h2 class="title">Card3</h2>
+    <p class="description">this is card3</p>
+  </div>
+
+  <div class="card">
+    <div class="img">
+	  
+	</div>
+    <h2 class="title">Card4</h2>
+    <p class="description">this is card4</p>
+  </div>
+
+</div>
+  
+</body>
+</html>

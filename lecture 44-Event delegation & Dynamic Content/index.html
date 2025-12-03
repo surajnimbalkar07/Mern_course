@@ -22,8 +22,8 @@
         parent.addEventListener("click", (event) => {
             console.log("parent is clicked");
 
-// event.stopPropagation()
-  event.stopImmediatePropagation()
+             // event.stopPropagation()
+            event.stopImmediatePropagation()
             console.log("target:", event.target);//element which triggered event, will be deepest child of this parent
             console.log("curerentTarget:", event.currentTarget);//element that have captured the event i.e element on which this
 
