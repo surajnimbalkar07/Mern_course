@@ -70,7 +70,7 @@
   const notesContainer = document.createElement("section");
   document.body.appendChild(notesContainer);
 
-  let notes = JSON.parse(sessionStorage.getItem("notes")) || [];
+  let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
   notes.forEach((text) => {
     const p = document.createElement("p");
@@ -89,7 +89,7 @@
     notesContainer.appendChild(p);
 
     notes.push(text);
-    sessionStorage.setItem("notes", JSON.stringify(notes));
+    localStorage.setItem("notes", JSON.stringify(notes));
 
     input.value = "";
   });

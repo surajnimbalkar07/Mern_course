@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile Manager</title>
+  <style>
+    body{
+      font-family: Arial;
+      padding: 30px;
+      background: #f3f3f3;
+    }
+    input, textarea{
+      width: 300px;
+      padding: 10px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    button{
+      padding: 8px 15px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #profileDisplay p{
+      margin: 5px 0;
+      background: #fff;
+      padding: 8px;
+      border-radius: 5px;
+      width: 320px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>User Profile Manager</h2>
+
+  <form id="profileForm">
+    <input type="text" name="name" placeholder="Full Name" />
+    <input type="email" name="email" placeholder="Email" />
+    <input type="text" name="phone" placeholder="Phone Number" />
+    <input type="text" name="city" placeholder="City" />
+    <textarea name="bio" placeholder="Short Bio"></textarea>
+  </form>
+
+  <button id="clearBtn">Clear Profile</button>
+
+  <h3>Saved Profile:</h3>
+  <section id="profileDisplay"></section>
+
+  <script>
+    const form = document.getElementById("profileForm");
+    const clearBtn = document.getElementById("clearBtn");
+    const display = document.getElementById("profileDisplay");
+
+    // Restore saved profile on load
+    const saved = JSON.parse(localStorage.getItem("userProfile"));
+    if(saved){
+      form.name.value = saved.name || "";
+      form.email.value = saved.email || "";
+      form.phone.value = saved.phone || "";
+      form.city.value = saved.city || "";
+      form.bio.value = saved.bio || "";
+
+      display.innerHTML = "";
+      for(const key in saved){
+        if(saved[key]){
+          const p = document.createElement("p");
+          p.textContent = `${key.toUpperCase()}: ${saved[key]}`;
+          display.appendChild(p);
+        }
+      }
+    }
+
+    
+    form.addEventListener("input", () => {
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        city: form.city.value,
+        bio: form.bio.value
+      };
+      localStorage.setItem("userProfile", JSON.stringify(data));
+
+      display.innerHTML = ""; 
+      for(const key in data){
+        if(data[key]){
+          const p = document.createElement("p");
+          p.textContent = `${key.toUpperCase()}: ${data[key]}`;
+          display.appendChild(p);
+        }
+      }
+    });
+
+    // Clear 
+    clearBtn.addEventListener("click", () => {
+      localStorage.removeItem("userProfile");
+      form.reset();
+      display.innerHTML = "";
+    });
+  </script>
+
+</body>
+</html>
+
+
+<!-- localStorage
+
+Data persists even after closing the browser.
+
+Good for things you want to remember long-term 
+(like user preferences, notes, saved profiles). -->
