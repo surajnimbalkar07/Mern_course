@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    main {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      justify-content: center;
+
+
+    }
+  </style>
+</head>
+
+<body>
+  <header> <!-- title + counters --> </header>
+
+  <main>
+    <section id="post-section">
+      <form id="post-form">
+        <!-- lost or found -->
+        <input type="radio" id="lradio" name="type" value="lost">
+<label for="lradio">Lost</label>
+
+<input type="radio" id="fradio" name="type" value="found">
+<label for="fradio">Found</label>
+
+
+        <!-- name -->
+        <br>
+        <label for="name">Name</label>
+        <input type="text" id="name">
+
+        <br><br>
+        <label for="description">description</label>
+        <textarea name="description" id="description"></textarea>
+
+        <br><br>
+        <label for="location">Location</label>
+        <input type="text" id="location">
+
+        <br><br>
+        <label for="date">Date</label>
+        <input type="date" id="date">
+
+        <br><br>
+        <label for="contact">Contact</label>
+        <input type="email" id="contact">
+
+        <br><br>
+        <label for="color">Color</label>
+        <input type="text" id="color">
+
+        <br><br>
+        <button>Submit</button>
+      </form>
+    </section>
+
+    <section id="boards">
+
+      <div id="lost-board" class="board">
+        <h2>Lost Items</h2>
+        <div class="items" id="lostItem"></div>
+      </div>
+
+      <div id="found-board" class="board">
+        <h2>Found Items</h2>
+        <div class="items" id="foundItem"></div>
+      </div>
+    </section>
+
+    <aside id="stats">
+      <!-- counters -->
+    </aside>
+
+    <template id="item-card-template"> <!-- card html --> </template>
+  </main>
+
+  <script>
+     let lostItem=document.querySelector("#lostItem ")
+     let foundItem=document.querySelector("#foundItem")
+    function isMatchFound(found) {
+  document.querySelectorAll("#lostItem .card").forEach(card => {
+
+    let lostName = card.querySelector(".item-name").textContent.toLowerCase();
+    let lostColor = card.querySelector(".item-color").textContent.toLowerCase();
+
+    if (
+      found.name.toLowerCase() == lostName ||
+      found.color.toLowerCase() == lostColor
+    ) {
+      card.style.backgroundColor = "red";
+    }
+  });
+}
+
+    document.querySelector("button").addEventListener("click", (e) => {
+      e.preventDefault();
+      const obj = {
+        type: document.querySelector("[name=type]:checked")?.value,
+        
+        name: document.querySelector("#name").value,
+        description: document.querySelector("#description").value,
+        location: document.querySelector("#location").value,
+        date: document.querySelector("[type=date]").value,
+        contact: document.querySelector("#contact").value,
+        color: document.querySelector("#color").value,
+      }
+
+
+      let items = JSON.parse(sessionStorage.getItem("items")) || [];
+      items.push(obj);
+      sessionStorage.setItem("items", JSON.stringify(items));
+
+
+      let newCard = document.createElement("div");
+      newCard.classList.add("card")
+
+      newCard.innerHTML = `
+       
+      <h1 class="item-name">${obj.name}</h1>
+       <h1>${obj.description}</h1>
+        <h1>${obj.location}</h1>
+         <h1>${obj.date}</h1>
+          <h1>${obj.contact}</h1>
+           <h1 class="item-color">${obj.color}</h1>
+      `
+    
+     if(obj.type=="lost"){
+      lostItem.appendChild(newCard)
+     }else if(obj.type=="found"){
+      
+      foundItem.appendChild(newCard)
+      isMatchFound(obj)
+     }
+    })
+
+
+  </script>
+</body>
+
+</html>

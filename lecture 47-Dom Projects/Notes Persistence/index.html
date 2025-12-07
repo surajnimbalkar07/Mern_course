@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{
+    font-family: Arial;
+    background:#f6f7fb;
+    padding:40px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  h2{
+    margin-bottom:10px;
+  }
+
+  form{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+  }
+
+  input{
+    padding:10px;
+    width:250px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:16px;
+  }
+
+  button{
+    padding:10px 20px;
+    border:none;
+    background:#4a76ff;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+  }
+
+  button:hover{
+    background:#3b63db;
+  }
+
+  section p{
+    background:white;
+    padding:10px;
+    width:300px;
+    margin-bottom:8px;
+    border-radius:6px;
+    border:1px solid #ddd;
+  }
+</style>
+</head>
+<body>
+
+<h2>Notes</h2>
+
+<form id="noteForm">
+  <input id="noteInput" placeholder="Write note..." />
+  <button>Save</button>
+</form>
+
+<script>
+  const form = document.getElementById("noteForm");
+  const input = document.getElementById("noteInput");
+  const btn = document.querySelector("button")
+
+  const notesContainer = document.createElement("section");
+  document.body.appendChild(notesContainer);
+
+  let notes = JSON.parse(sessionStorage.getItem("notes")) || [];
+
+  notes.forEach((text) => {
+    const p = document.createElement("p");
+    p.textContent = text;
+    notesContainer.appendChild(p);
+  });
+
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const text = input.value.trim();
+    if(!text) return;
+
+    const p = document.createElement("p");
+    p.textContent = text;
+    notesContainer.appendChild(p);
+
+    notes.push(text);
+    sessionStorage.setItem("notes", JSON.stringify(notes));
+
+    input.value = "";
+  });
+</script>
+
+</body>
+</html>
