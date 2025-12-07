@@ -46,3 +46,14 @@ console.log(result);
 
 
 // Output: [ [ 39, 54, 69 ], [ 49, 68, 87 ], [ 59, 82, 105 ] ]
+
+
+//add col dynamically
+{let newColumn = [10, 11, 12]; // same length as number of rows
+
+for (let i = 0; i < matrix.length; i++) {
+  matrix[i].push(newColumn[i]);
+}
+
+console.log("After adding a column:", matrix);
+}

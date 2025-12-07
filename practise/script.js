@@ -444,3 +444,180 @@ console.log(maxChar)//“We iterate through the string once to count frequencies
 //“HashMap operations means set,get etc are O(1) because keys are converted to hash codes,
 // which give a direct index in an internal array.
 // So access, insert, and lookup do not require scanning the array.”
+
+
+let n=4;
+let count=0;
+for(let i=1;i<=n;i++){
+    let result="";
+    for(let j=1;j<=n;j++){
+       if(i==1||i==n){
+           count++;
+           result+=count
+       }else{
+           if(j==1||j==n){
+               count++;
+               result+=count
+           }else{
+               result+=" "
+           }
+       }
+    }
+    console.log(result)
+}
+
+// 1234
+// 5  6
+// 7  8
+// 9101112
+
+
+
+
+{let n=5;
+for(let i=0;i<n;i++){
+  
+  let result="";
+  for(let s=0;s<=n-i-1;s++){
+    result+=" "
+  }
+  for(let j=0;j<=i;j++){
+    if(j==0||j==i){
+      result+="*"
+    }else{
+      result+=" "
+    }
+  }
+  for(let j=1;j<=i;j++){
+    if(j==0||j==i){
+      result+="*"
+    }else{
+      result+=" "
+    }
+  }
+  console.log(result)
+}
+for(let i=n-2;i>=0;i--){
+  
+  let result="";
+  for(let s=0;s<=n-i-1;s++){
+    result+=" "
+  }
+  for(let j=0;j<=i;j++){
+    if(i==n-1||i==0||j==0||j==i){
+      result+="*"
+    }else{
+      result+=" "
+    }
+  }
+  for(let j=1;j<=i;j++){
+    if(i==n-1||i==0||j==0||j==i){
+      result+="*"
+    }else{
+      result+=" "
+    }
+  }
+  console.log(result)
+}
+}
+//      *
+//     ***
+//    * * *
+//   *  *  *
+//  *   *   *
+//   *  *  *
+//    * * *
+//     ***
+//      *
+
+
+
+
+{
+let n=5;
+
+
+for(let i=0;i<n;i++){
+  
+  let result="";
+  // for(let s=0;s<=n-i-1;s++){
+  //   result+=" "
+  // }
+  for(let j=0;j<=n+2;j++){
+    if(j==0||j==i*2||i==n-1||j==n+2){
+      result+="*"
+    }else{
+      result+=" "
+    }
+  }
+  
+  console.log(result)
+}
+
+for(let i=n-2;i>=0;i--){
+  
+  let result="";
+  // for(let s=0;s<=n-i-1;s++){
+  //   result+=" "
+  // }
+  for(let j=0;j<=n+2;j++){
+    if(j==0||j==i*2||i==n-1||j==n+2){
+      result+="*"
+    }else{
+      result+=" "
+    }
+  }
+  
+  console.log(result)
+}
+}
+
+// *      *
+// * *    *
+// *   *  *
+// *     **
+// ********
+// *     **
+// *   *  *
+// * *    *
+// *      *
+
+
+
+
+
+
+
+function numPattern(n){
+  for(let i=1;i<=n;i++){
+  
+  let result="";
+  // for(let s=0;s<n-i-1;s++){
+  //   result+=" "
+  // }
+  for(let j=1;j<=i;j++){
+    
+      
+      result+=j+" "; 
+   
+  }
+  for(let j=i-1;j>=1;j--){
+    
+      
+      result+=j+" "; 
+   
+  }
+  
+  
+  console.log(result)
+}
+}
+numPattern(5)
+
+
+
+// 1 
+// 1 2 1 
+// 1 2 3 2 1 
+// 1 2 3 4 3 2 1 
+// 1 2 3 4 5 4 3 2 1 

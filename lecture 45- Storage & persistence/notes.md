@@ -103,7 +103,4 @@ LocalStorage is **not secure** because:
 * Theme (dark/light)
 * UI preferences
 * Non-sensitive info
-
-
----
-
+ 

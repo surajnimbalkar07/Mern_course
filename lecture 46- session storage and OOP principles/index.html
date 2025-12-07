@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            background-color: antiquewhite;
+            height: 50%;
+            padding: 5rem;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button {
+            border-style: none;
+            padding: 1rem;
+            background-color: blue;
+            color: white;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .education {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: none;
+        }
+
+        .experience {
+            display: none;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form">
+
+        <div class="personal">
+            <form>
+                <label for="name">First Name:</label>
+                <input type="text" id="fName"><br><br>
+                <label for="mid name">Middle Name:</label>
+                <input type="text" id="mName"><br><br>
+                <label for="last name">Last Name:</label>
+                <input type="text" id="lName"><br><br>
+                <label for="mobile">Contact No:</label>
+                <input type="tel" id="tel"><br><br>
+
+                <button class="personalSubmit">Submit</button>
+            </form>
+        </div>
+        <div class="education">
+            <form>
+                <label for="Degree">Degree:</label>
+                <input type="text" id="degree"><br><br>
+                <label for="college">College Name:</label>
+                <input type="text" id="collegeName"><br><br>
+                <label for="address">Address:</label>
+                <input type="text" id="address"><br><br>
+                <label for="cgpa">CGPA:</label>
+                <input type="text" id="cgpa"><br><br>
+
+                <button class="educationSubmit">Submit</button>
+            </form>
+        </div>
+        <div class="experience">
+            <form>
+
+                <label for="total">total experience:</label>
+                <input type="text" id="tExperience"><br><br>
+                <label for="company">past company:</label>
+                <input type="text" id="companyName"><br><br>
+                <label for="role">Role:</label>
+                <input type="text" id="role"><br><br>
+                <label for="description">description:</label>
+                <input type="text" id="description"><br><br>
+
+                <button class="experienceSubmit">Submit</button>
+            </form>
+        </div>
+        <!-- <button id="show">show</button> -->
+    </div>
+
+    <script>
+        const btn = document.querySelector(".personalSubmit");
+        const educationBtn = document.querySelector(".educationSubmit");
+        const experienceBtn = document.querySelector(".experienceSubmit");
+
+        let finalData = [];
+
+        // PERSONAL
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            let obj = {
+                firstName: document.querySelector("#fName").value,
+                middleName: document.querySelector("#mName").value,
+                lastName: document.querySelector("#lName").value,
+                contact: document.querySelector("#tel").value
+            };
+
+            finalData.push(obj);
+
+            document.querySelector(".personal").style.display = "none";
+            document.querySelector(".education").style.display = "flex";
+        });
+
+
+        // EDUCATION
+        educationBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            let obj1 = {
+                degree: document.querySelector("#degree").value,
+                collegeName: document.querySelector("#collegeName").value,
+                address: document.querySelector("#address").value,
+                cgpa: document.querySelector("#cgpa").value
+            };
+
+            finalData.push(obj1);
+
+            document.querySelector(".education").style.display = "none";
+            document.querySelector(".experience").style.display = "flex";
+        });
+
+
+        // EXPERIENCE
+        experienceBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            let obj2 = {
+                experience: document.querySelector("#tExperience").value,
+                company: document.querySelector("#companyName").value,
+                role: document.querySelector("#role").value,
+                description: document.querySelector("#description").value
+            };
+
+            finalData.push(obj2);
+
+
+            sessionStorage.setItem("userDetail", JSON.stringify(finalData));
+
+            console.log(JSON.parse(sessionStorage.getItem("userDetail")));
+
+            alert("Form submitted successfully");
+
+            // document.querySelector(".experience").style.display = "none";
+        });
+
+
+    </script>
+</body>
+
+</html>
