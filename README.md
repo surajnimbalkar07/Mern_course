@@ -80,6 +80,8 @@ Each lecture folder has been updated with code, assignments, and revision conten
 | 42 | Constructor & Prototypes | [Lecture 42](lecture%2042-constructor%20and%20prototypes/) |
 | 43 | ES6 Classes Fundamentals | [Lecture 43](lecture%2043-ES6%20Classes%20Fundamentals/) |
 | 44 | Event Delegation & DynamicContent | [Lecture 44](lecture%2044-Event%20delegation%20&%20Dynamic%20Content/) |
+| 45 | Storage & Persistence | [Lecture 45](lecture%2045-%20Storage%20&%20persistence/) |
+
 
 ---
 
