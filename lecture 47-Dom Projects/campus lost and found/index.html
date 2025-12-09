@@ -1,147 +1,327 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    main {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      justify-content: center;
+<meta charset="utf-8">
+<title>Campus Lost & Found</title>
+
+<style>
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding:20px;
+  background: #e8f0f9;
+
+}
+h1{
+  text-align:center;
+  font-size: 2.2em;
+  color: blueviolet;
+  margin-bottom: 30px;
+}
+.container{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  gap:20px;
+  flex-wrap: wrap;
+}
+form{
+  flex:1;
+  background:white;
+  padding:35px;
+}
+input, textarea, select{
+  width:100%;
+  padding:10px;
+  margin:8px 0 18px 0;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size: 0.95em;
+}
+
+button{
+  background: #0d3b66;
+  color:white;
+  border:none;
+  padding:8px 15px;
+}
+.section{
+  flex:2;
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
 
 
-    }
-  </style>
+.stats{
+  display:flex;
+  gap:20px;
+  margin-bottom:25px;
+}
+.stat{
+  padding:0.5rem ;
+  background:#fff;
+  font-size:18px;
+  font-weight:bold;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+.lostStat{
+  border-left:5px solid #d9534f;
+}
+.foundStat{
+  border-left:5px solid #5cb85c;
+}
+.resolvedStat{
+  border-left:5px solid #0275d8;
+}
+
+.item-card{
+  background:#fff;
+  padding:15px 20px;
+  margin-bottom:18px;
+  border-left:5px solid #0d3b66;
+}
+.item-card.lost{ border-left-color: #d9534f; }
+.item-card.found{ border-left-color: red; }
+
+
+
+/* agar match mile */
+.item-card.match{
+  border-left-color:#27ae60!important;
+  background:#eaffea;
+}
+
+.item-card button{
+  margin-right:8px;
+  padding:6px 12px;
+  font-size:0.9em;
+}
+.details{
+  background:#f7f9fc;
+  padding:12px;
+  border-radius:8px;
+  margin-top:12px;
+  font-size:0.9em;
+}
+.details img{
+  margin-top:10px;
+  border-radius:6px;
+}
+
+form label {
+  display: inline-flex;
+  align-items: center; 
+  margin-right: 15px;
+  font-size: 0.95em;
+}
+
+form input[type="radio"] {
+  margin-right: 5px; 
+}
+
+</style>
 </head>
 
 <body>
-  <header> <!-- title + counters --> </header>
 
-  <main>
-    <section id="post-section">
-      <form id="post-form">
-        <!-- lost or found -->
-        <input type="radio" id="lradio" name="type" value="lost">
-<label for="lradio">Lost</label>
+<h1>Campus Lost & Found</h1>
 
-<input type="radio" id="fradio" name="type" value="found">
-<label for="fradio">Found</label>
+<div class="container">
+
+<form id="postForm">
+  <h2>Post Item</h2>
 
 
-        <!-- name -->
-        <br>
-        <label for="name">Name</label>
-        <input type="text" id="name">
+  <label><input type="radio" name="type" value="lost" > Lost</label>
+  <label><input type="radio" name="type" value="found"> Found</label><br><br>
 
-        <br><br>
-        <label for="description">description</label>
-        <textarea name="description" id="description"></textarea>
+  <input type="text" name="itemName" placeholder="Item name" required>
+  <textarea name="description" placeholder="Description"></textarea>
 
-        <br><br>
-        <label for="location">Location</label>
-        <input type="text" id="location">
+  <select name="locationSelect" required>
+    <option value="">Select Location</option>
+    <option>Library</option>
+    <option>Cafeteria</option>
+    <option>Computer Lab</option>
+    <option>Ground</option>
+    <option>Admin Office</option>
+    <option>Main Gate</option>
+    <option>Parking Area</option>
+  </select>
 
-        <br><br>
-        <label for="date">Date</label>
-        <input type="date" id="date">
+  <input type="date"  name="date">
+  <input type="email" name="contact" placeholder="Contact email">
+  <input type="url"   name="photo" placeholder="Photo URL (optional)">
+  <input type="text"  name="color" placeholder="Color">
 
-        <br><br>
-        <label for="contact">Contact</label>
-        <input type="email" id="contact">
+  <button>Post Item</button>
+</form>
 
-        <br><br>
-        <label for="color">Color</label>
-        <input type="text" id="color">
 
-        <br><br>
-        <button>Submit</button>
-      </form>
-    </section>
+<div class="section">
 
-    <section id="boards">
+  <!--  counters -->
+  <div class="stats">
+    <div class="stat lostStat">Lost <span id="lostCountBox">0</span></div>
+    <div class="stat foundStat">Found <span id="foundCountBox">0</span></div>
+    <div class="stat resolvedStat">Resolved <span id="resolvedCountBox">0</span></div>
+  </div>
 
-      <div id="lost-board" class="board">
-        <h2>Lost Items</h2>
-        <div class="items" id="lostItem"></div>
-      </div>
+  <h2>Lost Items :<span id="lostCount">0</span></h2>
+  <div id="lostItems"></div>
 
-      <div id="found-board" class="board">
-        <h2>Found Items</h2>
-        <div class="items" id="foundItem"></div>
-      </div>
-    </section>
+  <h2>Found Items: <span id="foundCount">0</span></h2>
+  <div id="foundItems"></div>
+</div>
 
-    <aside id="stats">
-      <!-- counters -->
-    </aside>
+</div>
 
-    <template id="item-card-template"> <!-- card html --> </template>
-  </main>
+<script>
 
-  <script>
-     let lostItem=document.querySelector("#lostItem ")
-     let foundItem=document.querySelector("#foundItem")
-    function isMatchFound(found) {
-  document.querySelectorAll("#lostItem .card").forEach(card => {
+ //get item from localstorage 
+let state = {
+  items: JSON.parse(localStorage.getItem("items") || "[]")
+};
 
-    let lostName = card.querySelector(".item-name").textContent.toLowerCase();
-    let lostColor = card.querySelector(".item-color").textContent.toLowerCase();
 
-    if (
-      found.name.toLowerCase() == lostName ||
-      found.color.toLowerCase() == lostColor
-    ) {
-      card.style.backgroundColor = "red";
-    }
-  });
+//resuable function to set items in localstorage
+function save(){
+  localStorage.setItem("items", JSON.stringify(state.items));
 }
 
-    document.querySelector("button").addEventListener("click", (e) => {
-      e.preventDefault();
-      const obj = {
-        type: document.querySelector("[name=type]:checked")?.value,
-        
-        name: document.querySelector("#name").value,
-        description: document.querySelector("#description").value,
-        location: document.querySelector("#location").value,
-        date: document.querySelector("[type=date]").value,
-        contact: document.querySelector("#contact").value,
-        color: document.querySelector("#color").value,
-      }
+
+//check card by looping on it excluding itself ,agar match mile it will return true
+
+function checkMatch(item){
+  return state.items.some((itemCard )=>
+    itemCard.id !== item.id &&
+    itemCard.type !== item.type &&   
+    itemCard.name.toLowerCase() === item.name.toLowerCase()
+  );
+}
+
+//show all items
+function showItems(){
+  const lostContainer = document.getElementById("lostItems");
+  const foundContainer = document.getElementById("foundItems");
+  lostContainer.innerHTML = "";
+  foundContainer.innerHTML = "";
+
+  let lost=0, found=0;
+
+  state.items.forEach(item=>{
+    const match = checkMatch(item);
+
+    let div = document.createElement("div");
+    div.className = `item-card ${item.type} ${match ? "match":""}`;
+    div.dataset.id = item.id;
+
+    div.innerHTML = `
+      <b>${item.name}</b> (${item.type})<br>
+      <small>${item.location}</small><br>
+
+      <button class="expand">Details</button>
+      <button class="resolve">Mark Resolved</button>
+      <button class="contactOwner">Contact Owner</button>
+      <button class="edit">Edit</button>
+
+      ${item.type==="found" && match ? `<button class="matchBtn">This Might Be Mine!</button>`:""}
+     
+
+      <div class="details" style="display:none">
+        <p>${item.description}</p>
+        <p>Date: ${item.date}</p>
+        <p>Color: ${item.color}</p>
+        ${item.photo? `<img src="${item.photo}" width="120">`: ""}
+      </div>
+    `;
+
+    if(item.type==="lost"){ lost++; lostContainer.prepend(div); }
+    else { found++; foundContainer.prepend(div); }
+  });
+
+  document.getElementById("lostCount").textContent = lost;
+  document.getElementById("foundCount").textContent = found;
+  document.getElementById("lostCountBox").textContent = lost;
+  document.getElementById("foundCountBox").textContent = found;
+
+  let resolved = Number(localStorage.getItem("resolved") || 0);
+  document.getElementById("resolvedCountBox").textContent = resolved;
+}
 
 
-      let items = JSON.parse(sessionStorage.getItem("items")) || [];
-      items.push(obj);
-      sessionStorage.setItem("items", JSON.stringify(items));
+const form = document.getElementById("postForm");
+
+form.addEventListener("submit",(e)=>{
+  e.preventDefault();
+
+  let item = {
+    id:Date.now(),
+    type:form.type.value,
+    name:form.itemName.value.trim(),
+    description:form.description.value,
+    location:form.locationSelect.value,
+    date:form.date.value,
+    contact:form.contact.value,
+    color:form.color.value,
+    photo:form.photo.value
+  };
+
+  state.items.push(item);
+  //store
+  save();
+  //show
+  showItems();
+  form.reset();
+});
 
 
-      let newCard = document.createElement("div");
-      newCard.classList.add("card")
+//as we are adding card dynamically hum event delegation use karenge so instead of using it on every button simply attach on parent
+document.querySelector(".section").addEventListener("click", (e)=>{
+  let card = e.target.closest(".item-card");
+  if(!card) return;
 
-      newCard.innerHTML = `
-       
-      <h1 class="item-name">${obj.name}</h1>
-       <h1>${obj.description}</h1>
-        <h1>${obj.location}</h1>
-         <h1>${obj.date}</h1>
-          <h1>${obj.contact}</h1>
-           <h1 class="item-color">${obj.color}</h1>
-      `
-    
-     if(obj.type=="lost"){
-      lostItem.appendChild(newCard)
-     }else if(obj.type=="found"){
-      
-      foundItem.appendChild(newCard)
-      isMatchFound(obj)
-     }
-    })
+  let id = +card.dataset.id;
+  let item = state.items.find((x)=>x.id==id);
 
+  if(e.target.classList.contains("expand")){
+    let d = card.querySelector(".details");
+    d.style.display = d.style.display=="none"?"block":"none";
+  }
 
-  </script>
+  if(e.target.classList.contains("resolve")){
+    //resolve ke bad hum us item ko filter karke nikal denge aur count +1 karenge
+    state.items = state.items.filter((x)=>x.id!=id);
+    let r = Number(localStorage.getItem("resolved")||0)+1;
+    localStorage.setItem("resolved",r);
+    save(); showItems();
+  }
+
+  if(e.target.classList.contains("contactOwner")){
+    alert("Email: "+item.contact);
+  }
+
+  if(e.target.classList.contains("edit")){
+    const form = document.getElementById("postForm");
+    form.itemName.value=item.name;
+    form.description.value=item.description;
+    form.locationSelect.value=item.location;
+    form.date.value=item.date;
+    form.contact.value=item.contact;
+    form.photo.value=item.photo;
+    form.color.value=item.color;
+    //agar hum edit kr rahe he to us item ko filter krke nikal denge 
+    state.items = state.items.filter((x)=>x.id!=id);
+    save(); showItems();
+  }
+
+  if(e.target.classList.contains("matchBtn")){
+    alert("Contact: "+item.contact);
+  }
+});
+
+showItems();
+</script>
 </body>
-
 </html>
