@@ -10,6 +10,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       padding: 20px;
       background: #e8f0f9;
+
     }
 
     h1 {
@@ -59,6 +60,7 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     }
 
+
     .stats {
       display: flex;
       gap: 20px;
@@ -100,6 +102,9 @@
       border-left-color: red;
     }
 
+
+
+    /* agar match mile */
     .item-card.match {
       border-left-color: #27ae60 !important;
       background: #eaffea;
@@ -119,12 +124,20 @@
       font-size: 0.9em;
     }
 
-    .similar {
-      background: #fff8e1;
-      padding: 10px;
-      border-radius: 8px;
+    .details img {
       margin-top: 10px;
-      font-size: .85em;
+      border-radius: 6px;
+    }
+
+    form label {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 15px;
+      font-size: 0.95em;
+    }
+
+    form input[type="radio"] {
+      margin-right: 5px;
     }
   </style>
 </head>
@@ -137,6 +150,7 @@
 
     <form id="postForm">
       <h2>Post Item</h2>
+
 
       <label><input type="radio" name="type" value="lost"> Lost</label>
       <label><input type="radio" name="type" value="found"> Found</label><br><br>
@@ -163,8 +177,10 @@
       <button>Post Item</button>
     </form>
 
+
     <div class="section">
 
+      <!--  counters -->
       <div class="stats">
         <div class="stat lostStat">Lost <span id="lostCountBox">0</span></div>
         <div class="stat foundStat">Found <span id="foundCountBox">0</span></div>
@@ -176,7 +192,6 @@
 
       <h2>Found Items: <span id="foundCount">0</span></h2>
       <div id="foundItems"></div>
-
     </div>
 
   </div>
@@ -196,6 +211,7 @@
 
 
     //check card by looping on it ,excluding itself ,agar match mile it will return true
+
     function checkMatch(item) {
       return state.items.some((itemCard) =>
         itemCard.id !== item.id &&
@@ -204,46 +220,14 @@
       );
     }
 
-
-    function showSimilar(item, card) {
-      let list = state.items.filter(x =>
-        x.id !== item.id &&
-        x.name.toLowerCase().includes(item.name.toLowerCase())
-      );
-   let similarBox = card.querySelector(".similar");
-      if (list.length == 0) similarBox.style.display="none";
-
-   
-
-      similarBox.innerHTML = "<b>Similar Items:</b><br>" +
-        list.map(x => `${x.name} (${x.type})`).join("<br>");
-    }
-
-
-    function updateStats() {
-      document.getElementById("lostCount").textContent =
-        document.querySelectorAll(".item-card.lost").length;
-
-      document.getElementById("foundCount").textContent =
-        document.querySelectorAll(".item-card.found").length;
-
-      let r = Number(localStorage.getItem("resolved") || 0);
-      document.getElementById("resolvedCountBox").textContent = r;
-
-      document.getElementById("lostCountBox").textContent =
-        document.querySelectorAll(".item-card.lost").length;
-
-      document.getElementById("foundCountBox").textContent =
-        document.querySelectorAll(".item-card.found").length;
-    }
-
-
     //show all items
     function showItems() {
       const lostContainer = document.getElementById("lostItems");
       const foundContainer = document.getElementById("foundItems");
       lostContainer.innerHTML = "";
       foundContainer.innerHTML = "";
+
+      let lost = 0, found = 0;
 
       state.items.forEach(item => {
         const match = checkMatch(item);
@@ -253,72 +237,45 @@
         div.dataset.id = item.id;
 
         div.innerHTML = `
-            <b>${item.name}</b> (${item.type})<br>
-            <small>${item.location}</small><br>
+      <b>${item.name}</b> (${item.type})<br>
+      <small>${item.location}</small><br>
 
-            <button class="expand">Details</button>
-            <button class="resolve">Mark Resolved</button>
-            <button class="contactOwner">Contact Owner</button>
-            <button class="edit">Edit</button>
+      <button class="expand">Details</button>
+      <button class="resolve">Mark Resolved</button>
+      <button class="contactOwner">Contact Owner</button>
+      <button class="edit">Edit</button>
 
-            ${item.type === "found" && match ? `<button class="matchBtn">This Might Be Mine!</button>` : ""}
+      ${item.type === "found" && match ? `<button class="matchBtn">This Might Be Mine!</button>` : ""}
+     
 
-            <div class="details" style="display:none">
-              <p>${item.description}</p>
-              <p>Date: ${item.date}</p>
-              <p>Color: ${item.color}</p>
-              ${item.photo ? `<img src="${item.photo}" width="120">` : ""}
-            </div>
-
-            <div class="similar"></div>
-          `;
+      <div class="details" style="display:none">
+        <p>${item.description}</p>
+        <p>Date: ${item.date}</p>
+        <p>Color: ${item.color}</p>
+        ${item.photo ? `<img src="${item.photo}" width="120">` : ""}
+      </div>
+    `;
 
         if (item.type === "lost") {
+          lost++;
           lostContainer.prepend(div);
         } else {
+          found++;
           foundContainer.prepend(div);
         }
-
-        showSimilar(item, div);
       });
 
-      updateStats();
+      document.getElementById("lostCount").textContent = lost;
+      document.getElementById("foundCount").textContent = found;
+      document.getElementById("lostCountBox").textContent = lost;
+      document.getElementById("foundCountBox").textContent = found;
+
+      let resolved = Number(localStorage.getItem("resolved") || 0);
+      document.getElementById("resolvedCountBox").textContent = resolved;
     }
 
+
     const form = document.getElementById("postForm");
-
-    // AUTO-SAVE DRAFT
-    window.addEventListener("DOMContentLoaded", () => {
-      let saved = JSON.parse(localStorage.getItem("formDataArray")) || [];
-
-      let last = saved[saved.length - 1]; // latest draft
-
-      if (last) {
-        form.name.value = last.name || "";
-        form.email.value = last.email || "";
-        form.message.value = last.message || "";
-        form.phone.value = last.phone || "";
-        form.city.value = last.city || "";
-      }
-    });
-
-
-    setInterval(() => {
-      let obj = {
-        name: form.name.value,
-        email: form.email.value,
-        message: form.message.value,
-        phone: form.phone.value,
-        city: form.city.value,
-      };
-
-      let saved = JSON.parse(localStorage.getItem("formDataArray")) || [];
-      saved.push(obj);
-
-      localStorage.setItem("formDataArray", JSON.stringify(saved));
-    }, 1500);
-
-
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -336,14 +293,16 @@
       };
 
       state.items.push(item);
+      //store
       save();
+      //show
       showItems();
       form.reset();
     });
 
+
     //as we are adding card dynamically hum event delegation use karenge so instead of using it on every button simply attach on parent
     document.querySelector(".section").addEventListener("click", (e) => {
-
       let card = e.target.closest(".item-card");
       if (!card) return;
 
@@ -351,17 +310,16 @@
       let item = state.items.find((x) => x.id == id);
 
       if (e.target.classList.contains("expand")) {
-        let d = e.target.parentElement.querySelector(".details");
+        let d = card.querySelector(".details");
         d.style.display = d.style.display == "none" ? "block" : "none";
       }
 
       if (e.target.classList.contains("resolve")) {
+        //resolve ke bad hum us item ko filter karke nikal denge aur count +1 karenge
         state.items = state.items.filter((x) => x.id != id);
-        //resolve ke bad hum us item ko filter karke nikal denge aur count +1
         let r = Number(localStorage.getItem("resolved") || 0) + 1;
         localStorage.setItem("resolved", r);
-        save();
-        showItems();
+        save(); showItems();
       }
 
       if (e.target.classList.contains("contactOwner")) {
@@ -369,6 +327,7 @@
       }
 
       if (e.target.classList.contains("edit")) {
+        const form = document.getElementById("postForm");
         form.itemName.value = item.name;
         form.description.value = item.description;
         form.locationSelect.value = item.location;
@@ -378,14 +337,12 @@
         form.color.value = item.color;
         //agar hum edit kr rahe he to us item ko filter krke nikal denge 
         state.items = state.items.filter((x) => x.id != id);
-        save();
-        showItems();
+        save(); showItems();
       }
 
       if (e.target.classList.contains("matchBtn")) {
         alert("Contact: " + item.contact);
       }
-
     });
 
     showItems();
