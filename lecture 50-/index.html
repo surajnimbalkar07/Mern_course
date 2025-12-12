@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        main{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+           
+        }
+        /* ul{
+            list-style:decimal;
+        } */
+         .options{
+            margin-top: 32px;
+         }
+         li{
+            border: 1px solid ;
+            margin-bottom: 8px;
+            
+            padding: 1rem;
+            list-style: none;
+            cursor: pointer;
+         }
+
+        .quiz{
+            background-color: bisque;
+            padding: 2rem;
+            
+            
+        }
+        .timer{
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid black;
+            width: 20%;
+            padding: 0.5rem;
+            color: red;
+            
+        }
+        .buttons{
+            display: flex;
+            justify-content: space-between;
+        }
+        button{
+            cursor: pointer;
+            padding: 1rem;
+            font-size: 1rem;
+            width: 7rem;
+            background-color: blue;
+            color: white;
+            font-weight: 400;
+            border-style: none;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Quiz me bro</h1>
+        <section class="quiz">
+            <div class="timer" > 02.10</div>
+            <div class="question">
+                <p>Q:Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda, laborum.
+
+                </p>
+            </div>
+            <div class="options">
+                <ul>
+                    <li>Op1</li>
+                    <li>Op2</li>
+                    <li>Op3</li>
+                    <li>Op4</li>
+                </ul>
+            </div>
+            <div class="buttons">
+                <button>Prev</button>
+                <button>Next</button>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
