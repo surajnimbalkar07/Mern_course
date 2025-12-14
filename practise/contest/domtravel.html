@@ -1,0 +1,81 @@
+<!-- As a frontend developer for a e-commerce company, you are tasked with creating a feature on the product listing page. The feature should highlight the maximum priced product in the list. You are given the HTML structure of the product list as follows:
+
+<ul id="priceList">
+  <li>$5</li>
+  <li>$2</li>
+  <li>$8</li>
+  <li>$3</li>
+  <li>$7</li>
+</ul>
+Your task is to write a JavaScript code that, on page load, highlights (changes the background color to green) the list item with the maximum price. Note that the maximum price should be found dynamically using JavaScript and should not be hardcoded. The company is looking for a solution that is efficient and scalable.
+
+Please provide a JavaScript code that solves the problem described above -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <ul id="priceList">
+      <li>$5</li>
+      <li>$2</li>
+      <li>$8</li>
+      <li>$3</li>
+      <li>$7</li>
+    </ul>
+    <button>add</button>
+  </div>
+  <script>
+    const moreLi = [
+      { li: "$9" },
+      { li: "$11" }
+    ];
+
+    const newLi = document.querySelector("#priceList");
+    let list = newLi.querySelectorAll("li");
+    let btn = document.querySelector("button");
+
+    // Function to highlight the max <li>
+    function highlightMax() {
+      list = newLi.querySelectorAll("li"); // update the NodeList
+      let max = 0;
+      let maxNode = null;
+
+      list.forEach(li => {
+        const value = Number(li.textContent.replace("$", ""));
+        li.style.backgroundColor = ""; // reset previous highlight
+        if (value > max) {
+          max = value;
+          maxNode = li;
+        }
+      });
+
+      if (maxNode) maxNode.style.backgroundColor = "red";
+    }
+
+    // Initial highlight
+    highlightMax();
+
+    // Add new <li> and recalc max
+    btn.addEventListener("click", () => {
+      moreLi.forEach(item => {
+        const newlyCreate = document.createElement("li");
+        newlyCreate.textContent = item.li;
+        newLi.appendChild(newlyCreate);
+      });
+
+      // Recalculate max after adding new <li>
+      highlightMax();
+    });
+  </script>
+</body>
+
+</html>
