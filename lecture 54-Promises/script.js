@@ -200,3 +200,17 @@ fetchProduct().then(()=>{
 }).then(()=>{
 
 })
+
+console.log("start");
+const obj=new Promise((resolve)=>{
+  console.log("inside promise");
+  setTimeout(()=>{
+    console.log(("we are done"));
+    
+  },0)
+  
+})
+console.log("end");
+
+//start,inside promise ,end,we are done
+

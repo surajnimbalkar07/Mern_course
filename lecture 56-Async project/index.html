@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow</title>
+
+    <style>
+        * {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container,
+        .session {
+            background-color: beige;
+            border-radius: 1rem;
+            width: 50%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .session {
+            display: none;
+            text-align: center;
+
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: rgb(14, 67, 14);
+            font-weight: 600;
+        }
+
+        input {
+            width: 19rem;
+            padding: 0.5rem;
+        }
+
+        .submit{
+            width: 8rem;
+            padding: 0.7rem;
+            background-color: gray;
+            border: none;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .pause{
+            width: 8rem;
+            padding: 0.7rem;
+            /* background-color:red ; */
+            border: none;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+        }
+        button:disabled {
+            cursor: not-allowed;
+        }
+
+        .error {
+            color: red;
+            display: none;
+            font-size: 0.85rem;
+        }
+
+        .timer {
+            font-size: 3rem;
+            font-weight: 600;
+            color: green;
+            margin: 1rem 0;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #444;
+        }
+
+        .subtext {
+            color: #666;
+        }
+
+        .progressContainer {
+            width: 100%;
+
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: green;
+            border-radius: 5px;
+        }
+        .go{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <h1>FocusFlow</h1>
+        <div class="history">
+            <h3 id="session_name"></h3>
+            <h5 id="total_study"></h5>
+            <p id="status"></p>
+        </div>
+
+        <form>
+            <label>Session Name:</label>
+            <input type="text" class="session_name">
+            <span class="error error1"></span><br><br>
+
+            <label>Study duration:</label>
+            <input type="number" class="study_duration">
+            <span class="error error2"></span><br><br>
+
+            <label>Break duration:</label>
+            <input type="number" class="break_duration">
+            <span class="error error3"></span><br><br>
+
+            <label>Study Cycle:</label>
+            <input type="number" class="study_cycle">
+            <span class="error error4"></span><br><br>
+
+            <button class="submit">Start Session</button>
+        </form>
+    </div>
+
+    <div class="session">
+        <h2 class="status">Your session started</h2>
+        <h3 class="cycleText"></h3>
+        <div class="progressContainer">
+            <p class="progress"></p>
+        </div>
+        <p class="subtext">Stay focused and give your best</p>
+        <div class="timer">00:00</div>
+        <p class="quote"></p>
+        <button class="pause"></button>
+        <button class="go">Go To Home</button>
+
+
+    </div>
+
+    <script>
+        //home screen
+        const submitBtn = document.querySelector(".submit");
+        const homeScreen = document.querySelector(".container");
+        const sessionName = document.querySelector(".session_name");
+        const studyDuration = document.querySelector(".study_duration");
+        const breakDuration = document.querySelector(".break_duration");
+        const studyCycle = document.querySelector(".study_cycle");
+
+        const error1 = document.querySelector(".error1");
+        const error2 = document.querySelector(".error2");
+        const error3 = document.querySelector(".error3");
+        const error4 = document.querySelector(".error4");
+
+
+
+
+        //session screen
+        const sessionScreen = document.querySelector(".session");
+        const cyclePhase = document.querySelector(".cycleText")
+        const progress = document.querySelector(".progress");
+        const pausePlay = document.querySelector(".pause");
+        const statusText = document.querySelector(".status");
+        const timerEl = document.querySelector(".timer");
+        const quoteEl = document.querySelector(".quote");
+
+
+
+
+
+
+        let timer;
+        let currentCycle = 1;
+        let totalCycle = 0;
+        let isPaused = false
+
+        let remainingTime = 0;
+        let currentType = ""
+
+
+
+
+        function updateProgress() {
+            const percent = (currentCycle / totalCycle) * 100;
+            progress.style.width = percent + "%";
+        }
+        // function checkAllFields() {
+        //     if (
+        //         sessionName.value.trim() &&
+        //         studyDuration.value &&
+        //         breakDuration.value &&
+        //         studyCycle.value
+        //     ) {
+        //         submitBtn.disabled = false;
+        //         submitBtn.style.background = "green";
+        //     } else {
+        //         submitBtn.disabled = true;
+        //         submitBtn.style.background = "gray";
+        //     }
+        // }
+
+        // function ) {
+
+        //     const data = {
+        //         name: sessionName.value,
+        //         study_Duration: studyDuration.value,
+        //         break_duration: breakDuration.value,
+        //         cycle: studyCycle.value
+        //     }
+        //     localStorage.setItem("userData", JSON.stringify(data))
+        // }
+
+
+        //enable submit only when all fields are filled
+        [sessionName, studyDuration, breakDuration, studyCycle].forEach(input => {
+            input.addEventListener("input", () => {
+
+                submitBtn.disabled = !(sessionName.value && studyDuration.value && breakDuration.value && studyCycle.value);
+                submitBtn.style.background = submitBtn.disabled ? "gray" : "green";
+            });
+        });
+
+        //save session in LC
+        function saveSession() {
+            localStorage.setItem("sessionData", JSON.stringify({
+                currentCycle,
+                totalCycle,
+                remainingTime,
+                currentType,
+                isPaused
+            }))
+        }
+
+        //restore stored session
+        function restoreSession() {
+            const session = localStorage.getItem("sessionData");
+            if (session) {
+                homeScreen.style.display = "none";
+                sessionScreen.style.display = "block";
+                const s = JSON.parse(session);
+                currentCycle = s.currentCycle;
+                totalCycle = s.totalCycle;
+                remainingTime = s.remainingTime;
+                currentType = s.currentType;
+                isPaused = s.isPaused;
+
+                updateCycle();
+                updateProgress();
+                showQuote();
+
+                pausePlay.innerText = isPaused ? "Play" : "Pause"
+                timerEl.innerText = `${String(Math.floor(remainingTime / 60)).padStart(2, '0')}:${String(remainingTime % 60).padStart(2, '0')}`;
+
+                //run only when true
+                if (!isPaused) {
+                    startTimer(remainingTime, currentType)
+                }
+            }
+        }
+        //persist form 
+        // window.addEventListener("DOMContentLoaded", () => {
+        //     restoreSession()
+        //     // let savedData = localStorage.getItem("userData");
+        //     // if (savedData) {
+        //     //     const data = JSON.parse(savedData)
+
+        //     //     sessionName.value = data.name || "",
+        //     //         studyDuration.value = data.study_Duration || "",
+        //     //         breakDuration.value = data.break_duration || "",
+        //     //         studyCycle.value = data.cycle || ""
+
+        //     //     submitBtn.disabled = false;
+        //     //     submitBtn.style.background = "green"
+        //     // }
+        //     // checkAllFields()
+
+
+        // })
+
+
+        submitBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            let isValid = true;
+
+
+
+            if (sessionName.value.trim() === "") {
+                error1.innerText = "Session name can't be empty";
+                error1.style.display = "block";
+                isValid = false;
+            } else if (sessionName.value.length < 3) {
+                error1.innerText = "Minimum 3 characters required";
+                error1.style.display = "block";
+                isValid = false;
+            } else error1.style.display = "none";
+
+            if (studyDuration.value === "") {
+                error2.innerText = "Minimum 5 minutes required";
+                error2.style.display = "block";
+                isValid = false;
+            } else error2.style.display = "none";
+
+            if (breakDuration.value === "") {
+                error3.innerText = "Minimum 2 minutes required";
+                error3.style.display = "block";
+                isValid = false;
+            } else error3.style.display = "none";
+
+            if (studyCycle.value === "" || studyCycle.value < 1) {
+                error4.innerText = "Minimum 1 cycle required";
+                error4.style.display = "block";
+                isValid = false;
+            } else error4.style.display = "none";
+
+            if (isValid) {
+
+
+                homeScreen.style.display = "none";
+                sessionScreen.style.display = "block";
+                totalCycle = Number(studyCycle.value)
+                pausePlay.innerText = "Pause";
+
+                showQuote();
+                updateProgress()
+                updateCycle()
+                startTimer(studyDuration.value * 60, "study");
+            }
+        });
+
+
+
+
+        async function showQuote() {
+            const data = await fetch("https://random-quotes-freeapi.vercel.app/api/random");
+            const response = await data.json()
+            quoteEl.innerText = response.quote;
+        }
+
+        function updateCycle() {
+            cyclePhase.innerText = `cycle ${currentCycle}/${totalCycle}`
+        }
+        function startTimer(time, type) {
+            clearInterval(timer);
+            remainingTime = time;
+            currentType = type;
+
+            timer = setInterval(() => {
+                if (isPaused) return
+                let m = Math.floor(remainingTime / 60);
+                let s = (remainingTime % 60);
+                timerEl.innerText =
+                    `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                remainingTime--;
+                saveSession()
+
+                if (remainingTime < 0) {
+                    clearInterval(timer);
+                    if (type === "study") {
+                        if (currentCycle == totalCycle) {
+                            statusText.innerText = "Session completed";
+                            timerEl.innerText = "00:00";
+                            quoteEl.innerText = "Well done! ";
+                            cyclePhase.innerText = ""
+                            document.querySelector(".go").style.display="block"
+                            pausePlay.style.display="none"
+                            
+                            return
+
+                        }
+                        statusText.innerText = "You are on break";
+                        statusText.style.color = "red"
+
+                        startTimer(breakDuration.value * 60, "break");
+                    } else {
+                        if (currentCycle < totalCycle) {
+                            currentCycle++;
+                            updateProgress()
+                            updateCycle();
+                            statusText.innerText = "Your session started";
+                            statusText.style.color = "black"
+                            showQuote();
+                            startTimer(studyDuration.value * 60, "study")
+
+                        }
+
+                    }
+                }
+            }, 1000);
+
+        }
+        document.querySelector(".go").addEventListener("click",()=>{
+            sessionScreen.style.display="none";
+            homeScreen.style.display="block";
+
+            localStorage.setItem("finalData",JSON.stringify({
+                name:sessionName.value,
+                totalStudy:studyDuration.value*studyCycle.value,
+                completion:(currentCycle==totalCycle)?"complete":"pending"
+            }))
+
+            const userData=JSON.parse(localStorage.getItem("finalData"));
+            if (userData){
+                document.querySelector("#session_name").innerText=userData.name;
+                document.querySelector("#total_study").innerText=userData.totalStudy;
+                document.querySelector("#status").innerText=userData.completion
+
+            }
+        })
+       
+
+        //run when click pause btn
+        pausePlay.addEventListener("click", () => {
+            isPaused = !isPaused;
+            pausePlay.innerText = isPaused ? "Play" : "Pause"
+            pausePlay.style.background=isPaused?"green":"red"
+
+            if (!isPaused) {
+                startTimer(remainingTime, currentType)
+            }
+            saveSession()
+            restoreSession
+        })
+        window.onload = restoreSession
+    </script>
+
+</body>
+
+</html>
