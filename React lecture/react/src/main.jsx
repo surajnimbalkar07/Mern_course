@@ -2,7 +2,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 // import App from "./lecture 62-lifting state up/App";
-import App from "./lecture 63-Quiz Mini Project/App"
+// import App from "./lecture 63-Quiz Mini Project/App"
+// import App from "./lecture 64-UseEffect Basics/App";
+import App from "./lecture 65-UseEffect Advance/App";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
